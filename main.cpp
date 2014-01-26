@@ -339,7 +339,7 @@ extern "C" void* ThreadStats(void*) {
       queries += dnsThread[i]->dbQueries;
     }
     printf("%s %i/%i available (%i tried in %is, %i new, %i active), %i banned; %llu DNS requests, %llu db queries\n", c, stats.nGood, stats.nAvail, stats.nTracked, stats.nAge, stats.nNew, stats.nAvail - stats.nTracked - stats.nNew, stats.nBanned, (unsigned long long)requests, (unsigned long long)queries);
-    Sleep(1000);
+    Sleep(10000);
   } while(1);
 }
 
@@ -360,6 +360,7 @@ extern "C" void* ThreadSeeder(void *arg) {
       for (vector<CNetAddr>::iterator it = ips.begin(); it != ips.end(); it++) {
         db.Add(CService(*it, GetDefaultPort()), true);
       }
+      printf("ThreadSeeder completed for seed %s\n", seeds[i].c_str());
     }
     Sleep(1800000);
   } while(1);
