@@ -387,6 +387,10 @@ int main(int argc, char **argv) {
       seeds = testnet_seeds;
       fTestNet = true;
   }
+  if (!opts.fUseTestNet && !opts.ns) {
+    fprintf(stderr, "Error: Not using test Net and no nameservers set. Please specify nameserver.\n");
+    exit(1);
+  }
   if (!opts.ns) {
     printf("No nameserver set. Not starting DNS server.\n");
     fDNS = false;
